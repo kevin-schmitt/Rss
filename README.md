@@ -1,6 +1,5 @@
 # Rss
-Simple class permit to use rss
-class RSS first parameter is url and second is limit of item display
+Simple class permit to use rss class.  
 
 # Contribute
 git clone https://github.com/kevin-schmitt/Rss.git
