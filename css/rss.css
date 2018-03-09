@@ -1,3 +1,7 @@
+*
+{
+  font-family: old-standard, Arial;
+}
 .content{
 width: 60%;
 margin: 0 auto;
@@ -20,8 +24,10 @@ font-size: 17px;
 }
 
 h1{
-border-bottom: 1px solid gray;
+  font-size: 1.8em;
+  border-bottom: 1px solid gray;
 }
+
 
 h2{
 color: black;
@@ -35,7 +41,7 @@ text-decoration: none;
 border: 1px solid gray;
 padding: 5px;
 border-radius: 3px;
-margin-top: 15px;
+margin-top: 2%;;
 }
 
 .post-head span{
@@ -48,3 +54,10 @@ letter-spacing: 1px;
 font-size: 18px;
 color: black;
 }
+img
+{
+  width: 100%;
+  height: 100px;
+}
+
+

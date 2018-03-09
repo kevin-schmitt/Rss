@@ -43,6 +43,21 @@
 			}
     }
 
+		/**
+		 * get logo html in img balise
+		 *
+		 * @access public
+		 * @public
+		 * @param  none
+		 * @return html 
+		 */
+		public function getLogoHtml($urlLogo)
+		{
+			if(empty($urlLogo)) return "";
+			return '<img src="'.$urlLogo.'" alt="logo"/> ';
+		}
+		
+		
     /**
      * get data xml
      *
@@ -58,8 +73,12 @@
            $data = array();
            $site = $this->_feeds->channel->title;
            $sitelink = $this->_feeds->channel->link;
-           echo "<h1>".$site."</h1>";
-           echo '<section class="sectionRss">';
+					 
+					 // head
+					 echo '<header>';
+					 	echo $this->getLogoHtml($this->_feeds->channel->image[0]->url);
+           echo '</header>';
+					 
            $i = 0;
            foreach ($this->_feeds->channel->item as $item)
            {
@@ -98,15 +117,15 @@
      if(!empty($this->_error) && !empty($data) && is_array($data))
      {
        $content = '
-                     <div class="post">
-                       <div class="post-head">
+                     <article class="post">
+                       <header class="post-head">
                          <h2><a class="feed_title" href="'. $data['link'].'">'.$data['title'] .'</a></h2>
                          <span>'. $data['pubDate'] .'</span>
-                       </div>
-                       <div class="post-content">
+                       </header>
+                       <main class="post-content">
                          '.implode(' ', array_slice(explode(' ',  $data['description']), 0, 20)).'...' . '<a href="' . $data['link'] . '">Read more</a>
-                       </div>
-                     </div>';
+                       </main>
+                     </article>';
 				echo $content;
     }
     else
@@ -115,4 +134,6 @@
     }
 
 	}
+	
+
 }
