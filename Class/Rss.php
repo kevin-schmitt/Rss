@@ -1,4 +1,6 @@
 <?php
+
+  namespace  Rss;
 	class RSS{
 
     // url of xml
@@ -49,15 +51,15 @@
 		 * @access public
 		 * @public
 		 * @param  none
-		 * @return html 
+		 * @return html
 		 */
 		public function getLogoHtml($urlLogo)
 		{
 			if(empty($urlLogo)) return "";
 			return '<img src="'.$urlLogo.'" alt="logo"/> ';
 		}
-		
-		
+
+
     /**
      * get data xml
      *
@@ -73,12 +75,12 @@
            $data = array();
            $site = $this->_feeds->channel->title;
            $sitelink = $this->_feeds->channel->link;
-					 
+
 					 // head
 					 echo '<header>';
 					 	echo $this->getLogoHtml($this->_feeds->channel->image[0]->url);
            echo '</header>';
-					 
+
            $i = 0;
            foreach ($this->_feeds->channel->item as $item)
            {
@@ -134,6 +136,6 @@
     }
 
 	}
-	
+
 
 }

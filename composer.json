@@ -1,0 +1,16 @@
+{
+    "name": "kevin/rss",
+    "description": "rss project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kevin-schmitt",
+            "email": "kevin.schmitt.upjv@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+      "psr-4": {"Rss\\":"Class/"}
+    }
+}
