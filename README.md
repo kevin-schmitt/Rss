@@ -1,4 +1,4 @@
-# Rss
+<h1> Rss </h1>
 Simple class permit to use rss.  
 
 # Contribute
