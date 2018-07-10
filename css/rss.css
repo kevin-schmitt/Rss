@@ -2,25 +2,20 @@
 {
   font-family: old-standard, Arial;
 }
-.content{
-width: 60%;
-margin: 0 auto;
+img
+{
+	width: 10%;;
 }
-
 input[type=text]{
-padding: 5px 10px;
-width: 60%;
-letter-spacing: 1px;
+	padding: 5px 10px;
+	letter-spacing: 1px;
 }
 
-input[type=submit]{
-padding: 5px 15px;
-letter-spacing: 1px;
-border: 0;
-background: gold;
-color: white;
-font-weight: bold;
-font-size: 17px;
+input[type=url]{
+	width: 80%;
+	border: 5px solid lightblue;
+	padding: 5px 10px;
+	letter-spacing: 1px;
 }
 
 h1{
@@ -30,34 +25,47 @@ h1{
 
 
 h2{
-color: black;
+	color: black;
 }
 h2 a{
-color: black;
-text-decoration: none;
+	color: black;
+	text-decoration: none;
 }
 
 .post{
-border: 1px solid gray;
-padding: 5px;
-border-radius: 3px;
-margin-top: 2%;;
+	border: 2px solid gray;
+	padding: 5px;
+	border-radius: 3px;
+	margin: 0.1% 2% 2% 2%;
 }
 
 .post-head span{
-font-size: 14px;
-color: gray;
-letter-spacing: 1px;
+	font-size: 14px;
+	color: gray;
+	letter-spacing: 1px;
 }
 
 .post-content{
-font-size: 18px;
-color: black;
+	font-size: 18px;
+	color: black;
 }
-img
+.post:hover{
+	background: #e6e6e6;
+}
+/* **********************  grid system ******************************/
+.grid
 {
-  width: 100%;
-  height: 100px;
+	display: grid;
+	text-align: center;
+	 grid-template-areas:
+		'url'
+		'logo'
+		'main';
+
 }
 
-
+.url { grid-area: url; }
+.logo { 
+	grid-area: logo; 
+}
+.main { grid-area: main; }

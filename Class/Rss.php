@@ -1,30 +1,46 @@
 <?php
 
-  namespace  Rss;
+    namespace  Rss;
 	class RSS{
 
     // url of xml
-		private $_url = null;
+    private $_url = null;
     private $_error = false;
+	private $_logo;
     // content of xml
     private $_feeds;
     // number of item get and display from xml
     private $_limitRss;
 
 
-		public function __construct($url, $limit = 5){
+	public function __construct($url, $limit = 5){
 
       if($url = filter_var($url, FILTER_VALIDATE_URL))
       {
         $this->_url = $url;
         $this->_limitRss = (int) $limit;
-				$this->loadFile();
+	    $this->loadFile();
+	    $this->setLogoUrl($this->_feeds->channel->image[0]->url);
       }
       else {
         $this->_error = true;
       }
-		}
+	}
 
+	/**
+     * generate input url 
+     *
+     * @access static
+     * @public
+     * @param  none
+     * @return String 
+     */
+	public function showInputUrl() : String 
+	{
+		$input = '<input type="url" id="urlRss" value="'.$this->_url.'" name="rss" readonly>';
+		return $input;
+	}
+	
     /**
      * load xml file rss
      *
@@ -45,23 +61,36 @@
 			}
     }
 
-		/**
-		 * get logo html in img balise
-		 *
-		 * @access public
-		 * @public
-		 * @param  none
-		 * @return html
-		 */
-		public function getLogoHtml($urlLogo)
-		{
-			if(empty($urlLogo)) return "";
-			return '<img src="'.$urlLogo.'" alt="logo"/> ';
-		}
+	/**
+	 * get logo html in img balise
+	 *
+	 * @access public
+	 * @public
+	 * @param  none
+	 * @return html
+	 */
+	public function getLogoHtml(): string
+	{
+		if(empty($this->_logo)) return "";
+		return '<img src="'.$this->_logo.'" alt="logo"/> ';
+	}
 
-
+	/**
+	 * get logo html in img balise
+	 *
+	 * @access public
+	 * @public
+	 * @param  none
+	 * @return html
+	 */
+	public function setLogoUrl(string $urlLogo) 
+	{
+		$this->_logo = $urlLogo;
+	}
+	
+	
     /**
-     * get data xml
+     * transform rss data to html data
      *
      * @access public
      * @public
@@ -75,30 +104,26 @@
            $data = array();
            $site = $this->_feeds->channel->title;
            $sitelink = $this->_feeds->channel->link;
-
-					 // head
-					 echo '<header>';
-					 	echo $this->getLogoHtml($this->_feeds->channel->image[0]->url);
-           echo '</header>';
-
-           $i = 0;
-           foreach ($this->_feeds->channel->item as $item)
-           {
-            // limit
-            if($i > $this->_limitRss)  break;
+			
+		   echo '<section class="article">';
+			   $i = 0;
+			   foreach ($this->_feeds->channel->item as $item)
+			   {
+				// limit
+				if($i > $this->_limitRss)  break;
 
 
-             $data['title'] = $item->title;
-             $data['link'] = $item->link;
-             $data['description'] = $item->description;
-             $data['postDate'] = $item->pubDate;
-             $data['pubDate'] = date('D, d M Y',strtotime( $data['postDate']));
+				 $data['title'] = $item->title;
+				 $data['link'] = $item->link;
+				 $data['description'] = $item->description;
+				 $data['postDate'] = $item->pubDate;
+				 $data['pubDate'] = date('D, d M Y',strtotime( $data['postDate']));
 
-             $this->display($data);
-						 $i++;
+				 $this->display($data);
+				 $i++;
 
-           }
-              echo '</section>';
+			   }
+             echo '</section>';
       }
       else {
           $this->_error = true;
@@ -125,7 +150,7 @@
                          <span>'. $data['pubDate'] .'</span>
                        </header>
                        <main class="post-content">
-                         '.implode(' ', array_slice(explode(' ',  $data['description']), 0, 20)).'...' . '<a href="' . $data['link'] . '">Read more</a>
+                         '.implode(' ', array_slice(explode(' ',  $data['description']), 0, 90)).'...' . '<a href="' . $data['link'] . '">Read more</a>
                        </main>
                      </article>';
 				echo $content;
