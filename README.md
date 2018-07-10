@@ -2,9 +2,9 @@
 Simple class permit to use rss with url (rss format use is xml).  
 <h5>Initialisation</h5>
 <code>
-  require __DIR__ . '/vendor/autoload.php';
-	use Rss\Rss;
-	$url = 'https://www.developpez.com/index/rss';
+        require __DIR__ . '/vendor/autoload.php';\n
+	use Rss\Rss;\n
+	$url = 'https://www.developpez.com/index/rss';\n
 	$rss = new Rss($url, 6);  
  </code>
 <h5>Use</h5>
